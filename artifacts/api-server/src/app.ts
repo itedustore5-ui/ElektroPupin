@@ -33,7 +33,7 @@ app.use(express.urlencoded({ extended: true }));
 app.use("/api", router);
 
 if (process.env.NODE_ENV === "production") {
-  const publicDir = path.join(process.cwd(), "artifacts/srpski-kviz/dist/public");
+ const publicDir = path.join(path.dirname(new URL(import.meta.url).pathname), "..", "..", "..", "artifacts", "srpski-kviz", "dist", "public");
   app.use(express.static(publicDir));
   app.get("/{*path}", (_req, res) => {
     res.sendFile(path.join(publicDir, "index.html"));
